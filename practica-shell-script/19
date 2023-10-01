@@ -1,3 +1,4 @@
+#!/bin/bash
 PS3="Ingrese un programa: "
 select action in Calculadora 1al100 Comandos Existe Renombrar Reporte Intercambio VerificarLogs Salir
 do
