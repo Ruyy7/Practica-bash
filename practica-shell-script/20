@@ -1,0 +1,23 @@
+arreglo=()
+select opcion in Push Pop Length Print Salir 
+do 
+  case $opcion in 
+     "Push")
+        echo "Ingrese un valor: " 
+        read num
+        arreglo[${#arreglo[*]}]=$num
+        ;;
+     "Pop")
+        unset arreglo[${#arreglo[*]}-1] 
+        ;;
+     "Length")
+        echo "${#arreglo[*]}"
+        ;;
+     "Print")
+        echo "${arreglo[*]}"
+        ;;
+     "Salir")
+        exit 0 
+        ;;
+  esac 
+done

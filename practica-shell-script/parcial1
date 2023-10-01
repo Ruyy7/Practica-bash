@@ -1,0 +1,42 @@
+#!/bin/bash  
+
+if [ $# -ne 1 ] 
+then 
+  echo "no ingresaste todos los parametros" 
+  exit 2
+fi 
+encontro=false
+for usuario in $(cat /etc/passwd | cut -d: -f1)
+do 
+  if [ $usuario = $1 ]  
+  then 
+     echo "El usuario existe dentro del sistema"
+     encontro=true
+     break 
+  fi 
+done 
+if [ $encontro != true ] 
+then 
+  echo "No se encontro el usuario en el sistema "
+  exit 1
+fi
+cant=0
+encontro=false
+while [ $cant -lt 8 ]
+do 
+  for usuario in $(who | cut -d " " -f1)
+  do 
+    if [ $usuario = $1 ]  
+    then 
+      echo "El usuario esta logeado" 
+      ((cant++))
+      encontro=true
+      break
+    fi 
+    if [ $cant -eq 1 ] 
+    then 
+      echo "$1 $(date)" > /etc/access<$1>.log
+    fi 
+  done 
+  sleep 2
+done

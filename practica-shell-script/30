@@ -1,0 +1,21 @@
+#!/bin/bash
+cant=0
+if [ -d $HOME/bin ]; then
+	for archivos in $(ls -R ./)
+	do
+		if [ -f $archivos ] && [ -x $archivos ];then
+			echo "Moviendo archivo $archivos"
+			mv $archivos $HOME/bin/
+			((cant++))
+		fi
+	done
+else
+	echo "Se creara el subdirectorio bin y se cierra el programa"
+	mkdir $HOME/bin
+	exit 0
+fi
+if [ $cant -eq 0 ];then
+	echo "No se movio ningun archivo"
+else
+	echo "Se movieron $cant archivos"
+fi

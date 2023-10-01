@@ -1,0 +1,18 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+	echo "La cantidad de parametros a recibir es 1"
+	exit 1
+fi
+while true
+do
+if [ -f ./error.log ]; then
+	if [ $(cat ./error.log | grep "FATAL ERROR" | wc -l) -ge 1 ];then
+		echo "Comprimiendo..."
+		tar -czvf $1 ./12prueba
+		cant=$(cat ./error.log | grep "FATAL ERROR" | wc -l)
+		echo "Cantidad de lineas con texto "FATAL ERROR": $cant"
+		exit 0
+	fi
+fi
+sleep 3m
+done

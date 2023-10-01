@@ -1,0 +1,72 @@
+#!/bin/bash
+inicializar() {
+  vector=()
+}
+
+agregar_elem() {
+  vector+=($1)
+  return 0
+}
+
+eliminar_elem() {
+	if [ $1 -ge 0 ] && [ $1 -le $(expr ${#vector[*]} - 1) ]; then
+    unset vector[$1]
+    return 0
+  fi
+  echo "No se encuentra el indice"
+  return 1
+}
+
+longitud(){
+  echo "Longitud del arreglo ${#vector[*]}"
+  return 0
+}
+
+imprimir(){
+  echo "Elementos del arreglo: ${vector[*]}"
+  return 0
+}
+
+inicializar_Con_Valores(){
+  array=()
+  for ((i=0;i<$1;i++))
+  do
+    array+=($2)
+  done
+  return 0
+}
+
+select action in Inicializar Agregar Eliminar Longitud Imprimir InicializarCV Salir
+do
+  case $action in
+  "Inicializar")
+    inicializar
+    ;;
+  "Agregar")
+    echo "Ingrese un numero a agregar: "
+    read num
+    agregar_elem $num
+    ;;
+  "Eliminar")
+    echo "Ingrese una posicion a borrar: "
+    read num
+    eliminar_elem $num
+    ;;
+  "Longitud")
+    longitud
+    ;;
+  "Imprimir")
+    imprimir
+    ;;
+  "InicializarCV")
+    echo 'Ingrese longitud y valor (separado por espacios)'
+    read longitud valor
+    inicializar_Con_Valores $longitud $valor
+    echo "Vector resultante: ${array[*]} "
+    ;;
+  "Salir")
+    exit 0
+    ;;
+  esac
+done
+

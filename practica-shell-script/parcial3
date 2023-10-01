@@ -1,0 +1,96 @@
+#!/bin/bash 
+
+insert_elemento(){
+  if [ $# -ne 1 ] 
+  then 
+    echo "tenes que pasar 1 solo parametro pa" 
+    return 1 
+  fi 
+  vector+=($1)
+} 
+rellenar_n(){
+  if [ $# -ne 1 ] 
+  then 
+    echo "tenes que pasar 1 solo parametro pa" 
+    return 1 
+  fi 
+  for((i=0; i < n; i++))
+  do 
+    read patron
+    vector+=($patron)
+  done 
+} 
+select_elemento(){ 
+  if [ $# -ne 1 ] 
+  then 
+    echo "tenes que pasar 1 solo parametro pa" 
+    return 1 
+  fi
+  if [ $# -eq '*' ] 
+  then 
+    echo "${vector[*]}"
+  else 
+    encontrado=false 
+    for ((i=0; i < ${#vector[*]}; i++ )) 
+    do  
+     if [ ${vector[$i]} = $1 ]  
+     then 
+        encontrado=true
+        indice=$i
+        break
+     fi 
+   done 
+  if [ $encontrado = true ] 
+  then 
+     echo ${vector[$indice]}
+  else 
+     echo "Elemento no encontrado" 
+  fi 
+  return 0
+  fi
+}
+delete_elemento(){ 
+  if [ $# -ne 1 ] 
+  then 
+    echo "teens que pasar 1 parametro" 
+  fi 
+  if [ $1 = '*' ] 
+  then 
+    for ((i=0; i < ${#vector[*]}; i++)) 
+    do 
+      unset vector[$i]
+      vector=${vector[*]} 
+    done 
+  else 
+    for ((i=0; i < ${#vector[*]}; i++)) 
+    do 
+      if [ ${vector[$i]} = $1 ] 
+      then 
+        unset vector[$i]
+        return 0 
+      fi 
+    done 
+    echo "Elemento no encontrado" 
+    return 1 
+  fi 
+} 
+select opcion in Insert Rellenar Select Delete Salir 
+do 
+  case $opcion in 
+  "Insert") 
+     insert_elemento
+     ;;  
+  "Rellenar")
+     rellenar
+     ;;
+  "Select") 
+     select_elemento
+     ;;
+  "Delete") 
+     delete_elemento
+     ;;
+  "Salir") 
+     exit 0 
+     ;; 
+  esac 
+done

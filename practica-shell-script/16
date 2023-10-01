@@ -1,0 +1,9 @@
+if [ $# != 1 ]; then
+  echo "La cantidad de parametros es invalida"
+  exit 1
+fi
+echo "Buscando archivos con extension $1"
+echo "Nombre del usuario  Cantidad de archivos con extension $1" > ./extensiones/reporte.txt
+cantidad=$(find ./extensiones -type f -name "*.$1" | wc -l)
+echo $(whoami) $cantidad >> ./extensiones/reporte.txt
+exit 0

@@ -1,0 +1,12 @@
+vector=(2 1 6 7 9 4 8 2 1)
+contador=0
+for ((i=0; i<${#vector[*]};i ++))
+do
+  if  [ $(expr ${vector[i]} % 2) -eq 0 ]; then
+    echo ${vector[i]}
+  else
+    ((contador+=1))
+  fi
+done
+echo "Cantidad de impares: $contador"
+exit 0

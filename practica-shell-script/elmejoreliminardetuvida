@@ -1,0 +1,20 @@
+eliminar(){
+	if [ $# -ne 2 ];then
+		echo "Cantidad de parametros incorrecta"
+	fi
+	if [ $1 -ge 0 ] && [ $1 -le $(expr ${#vector[*]} -1) ]; then
+		echo "Indice invalido"
+		return 1
+	fi
+	if [ $2 = l ];then
+		unset vector[$1]
+ 	elif [ $2 = f ]; then
+		rm /var/log/${vector[$1]}
+		echo "Borrado fisico padree"
+		unset vector[$1]
+	else
+		echo "Comando no valido"
+		return 2
+	fi
+}
+

@@ -1,0 +1,11 @@
+if [ $# != 1 ]; then
+  echo "La cantidad de parametros no es la correcta"
+  exit 1
+fi
+while [ $1 != "$(who | cut -d ' ' -f1 | grep $1)" ]
+do
+  echo "Esperando"
+  sleep 10
+done
+echo "Usuario $1 logueado en el sistema"
+exit 0

@@ -1,0 +1,25 @@
+if [ $# -gt 2 ]; then
+  echo "La cantidad de parametros no es la correcta"
+fi
+vector=()
+for usuario in $(ls /home/)
+do
+  vector+=($usuario)
+done
+case $* in
+  "-b n")
+    if [ ${vector[$2]} -gt 0 ]; then
+      echo ${vector[$2]}
+    else
+      echo "No existe la posicion $2 en el arreglo"
+      exit 2
+    fi
+  ;;
+  "-l")
+    echo "Longitud del vector: ${#vector[*]}"
+  ;;
+  "-i")
+    echo "Todos los usuarios: ${vector[*]}"
+  ;;
+esac
+exit 0

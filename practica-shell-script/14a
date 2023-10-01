@@ -1,0 +1,19 @@
+if [ $# -ne 3 ];then
+ exit 1
+fi
+cd $1
+for archiv in *
+do
+ if [ -f $archiv ]
+ then
+   echo "Procesando archivo: $archiv"
+   if [ $2 = "-a" ]; then 
+     mv $archiv "$archiv$3"
+   elif [ $2 = "-b" ]; then
+     mv $archiv "$3$archiv"
+   else
+     echo "Parametro de renombre invalido $2, tiene que ser -a o -b"
+   fi
+ fi
+done
+exit 0

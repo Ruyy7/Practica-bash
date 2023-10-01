@@ -1,0 +1,69 @@
+PS3="Ingrese un programa: "
+select action in Calculadora 1al100 Comandos Existe Renombrar Reporte Intercambio VerificarLogs Salir
+do
+  case $action in
+    "Calculadora")
+      PS3="Selecciona una calculadora: "
+      select calculadora in Calculadora1 CalculadoraParametros CalculadoraParametros2 Salir
+      do
+        case $calculadora in
+          "Calculadora1")
+            ./12a
+            ;;
+          "CalculadoraParametros")
+            echo "Ingrese 2 numeros separados por espacio"
+            read num1 num2
+            ./12b $num1 $num2
+            ;;
+          "CalculadoraParametros2")
+            echo "Ingrese una operacion entre 2 numeros, todo separado por espacio"
+            read num1 op num2
+            ./12c $num1 $op $num2
+            ;;
+	  "Salir")
+	    echo "Cerrando calculadoras"
+	    break
+	    ;;
+        esac
+      done
+      ;;
+    "1al100")
+      ./13a
+      ;;
+    "Comandos")
+      ./13b
+      ;;
+    "Existe")
+      echo "Ingrese un nombre de archivo"
+      read nombrearchivo
+      ./13c $nombrearchivo
+      ;;
+    "Renombrar")
+      echo "Ingrese directorio, -a o -b y prefijo o sufijo para el renombre, todo separado por espacios"
+      read dir op rename
+      ./14 $dir $op $rename
+      ;;
+    "Reporte")
+      echo "Ingrese una extensión de archivo"
+      read ext
+      ./16 $ext
+      ;;
+    "Intercambio")
+      echo "Intercambiando nombre de archivos"
+      ./17
+      ;;
+    "VerificarLogs")
+      echo "Ingrese un usuario a verificar su logeo"
+      read user
+      ./18 $user
+      ;;
+    "Salir")
+      echo "Cerrando programa"
+      exit 0
+      ;;
+    *)
+      echo "Opción inválida"
+      ;;
+  esac
+done
+

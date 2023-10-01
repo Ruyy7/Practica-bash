@@ -1,0 +1,6 @@
+for archivo in $(ls ./nombres/)
+do
+  invertido=$(echo $archivo | tr 'a-z' 'A-Z' | tr -d 'aA')
+  mv ./nombres/$archivo ./nombres/$invertido
+done
+exit 0

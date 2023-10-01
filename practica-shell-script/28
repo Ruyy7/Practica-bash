@@ -1,0 +1,20 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+  echo "Debe pasar un solo parametro"
+  exit 1
+fi
+
+if [ -d $1 ];then
+  cant=0
+  for archivos in $(ls $1)
+  do
+    if [ -f $archivos ] && [ -r $archivos ] && [ -w $archivos ]; then
+      ((cant++))
+    fi
+  done
+  echo "Cantidad de archivos en el directorio $1: $cant"
+else
+  echo "El directorio pasado no existe"
+  exit 4
+fi
+exit 0

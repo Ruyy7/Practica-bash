@@ -1,0 +1,21 @@
+#!/bin/bash
+if [ $# -lt 1 ]; then
+  echo "Debe ingresar al menos 1 parametro"
+  exit 1
+fi
+cant=0
+for parametro in $*
+do
+  if [ -f $parametro ]
+  then 
+    echo "$parametro es un archivo"
+  elif [ -d $parametro ]; then
+    echo "$parametro es un directorio"
+  else 
+    echo "El archivo/directorio $parametro no existente"
+    cant=$(expr $cant + 1)
+  fi 
+  continue
+done
+  echo "Cantidad de direcciones inexistentes: $cant"
+exit 0

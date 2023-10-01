@@ -1,0 +1,17 @@
+echo "Ingrese un numero: "
+read numero1
+echo "Ingrese otro numero: "
+read numero2
+echo "Suma: `expr $numero1 + $numero2`"
+echo "Resta: `expr $numero1 - $numero2`"
+echo "Multiplicacion: `expr $numero1 \* $numero2`"
+if [ $numero1 -gt $numero2 ]
+then
+	echo "$numero1 es mayor que $numero2"
+elif [ $numero1 -lt $numero2 ]
+then
+	echo "$numero2 es mayor que $numero1"
+else
+	echo "Son iguales"
+fi
+exit 0

@@ -1,0 +1,81 @@
+#!/bin/bash
+vector=($(find $HOME -name "*.doc"))
+echo "Archivos encontrados: ${vector[*]}"
+verArchivo(){
+	ok=false
+	for archivo in ${vector[*]}
+	do
+		aux=$(basename $archivo)
+		if [ "$1" = "$aux" ]; then
+		       echo "Archivo $1 encontrado"
+	       	       ok=true
+		       break
+		fi	       
+	done
+	if [ $ok != true ]; then
+		echo "No se encontro el archivo"
+		return 5
+	fi
+	return 0
+}
+
+cantidadArchivos(){
+	echo "Cantidad de archivos ${#vector[*]}"
+	return 0
+}
+
+borrarArchivo(){
+	ok=false
+	contador=0
+	for archivo in ${vector[*]}
+        do
+		aux=$(basename $archivo)
+                if [ "$1" = "$aux" ]; then
+                       echo "Archivo $1 encontrado"
+                       ok=true
+		       break
+                fi
+		((contador++))
+        done
+        if [ $ok != true ]; then
+                echo "No se encontro el archivo"
+                return 5
+        else
+		echo "Desea borrar el archivo logicamente? (y/n)"
+		read op
+		if [ $op = "y" ];then
+			unset vector[contador]
+		elif [ $op = "n" ];then
+			direccion=${vector[contador]}
+			unset vector[contador]
+			rm $direccion
+			return 10
+		else
+			echo "Parametro no valido te comes un exit 1 jaja"
+			exit 1
+		fi
+	fi
+
+}
+PS3="Seleccione una opcion: "
+select opcion in VerArchivo Cantidad BorrarArchivo Salir
+do
+	case $opcion in
+	"VerArchivo")
+		echo "Ingrese nombre de un archivo"
+		read nombrearchivo
+		verArchivo $nombrearchivo
+		;;
+	"Cantidad")
+		cantidadArchivos
+		;;
+	"BorrarArchivo")
+		echo "Ingrese un nombre de archivo a borrar"
+		read eliminado
+		borrarArchivo $eliminado
+		;;
+	"Salir")
+		exit 0
+		;;
+	esac
+done
