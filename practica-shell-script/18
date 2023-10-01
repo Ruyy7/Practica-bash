@@ -1,3 +1,4 @@
+!#/bin/bash
 if [ $# != 1 ]; then
   echo "La cantidad de parametros no es la correcta"
   exit 1
